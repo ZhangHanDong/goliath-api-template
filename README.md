@@ -14,4 +14,5 @@
 8. 支持capistrano部署
 9. 支持paperclip文件上传（查看config/initializes/paperclip.rb）
 10. 支持国际化、本地时区
-11. 其他（比如，可以自己配置Grape Entity替换jbuilder等）
+11. 支持Redis Sentinal和Memcached(自己扩展)
+12. 其他（比如，可以自己配置Grape Entity替换jbuilder等）
