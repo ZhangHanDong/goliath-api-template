@@ -1,0 +1,97 @@
+user  nobody;
+worker_processes  4;
+
+events {
+  use epoll;
+  worker_connections  65533;
+}
+
+
+http {
+
+    #for goliath
+     upstream users_cluster {
+       server 127.0.0.1:9000;
+       server 127.0.0.1:9001;
+       server 127.0.0.1:9002;
+       server 127.0.0.1:9003;
+     }
+
+     upstream pay_cluster {
+       server 127.0.0.1:8000;
+       server 127.0.0.1:8001;
+     }
+
+     upstream attachments_cluster {
+       server 127.0.0.1:6000;
+       server 127.0.0.1:6001;
+     }
+
+
+    include       mime.types;
+    default_type  application/octet-stream;
+
+    sendfile        on;
+    tcp_nopush     on;
+
+    tcp_nodelay on;``
+    keepalive_timeout 65;
+    types_hash_max_size 2048;
+    client_max_body_size 50m;
+
+    gzip  on;
+
+
+    server {
+        listen       80;
+        server_name  mobile-1.demo.com;
+
+        root  /alidata1/var/apps/mobile-api/current/public;
+
+        location ~* ^/(upload)/ {
+              access_log        off;
+              expires           max;
+              add_header Cache-Control public;
+              break;
+        }
+
+        location /{
+        proxy_redirect     off;
+        proxy_set_header   Host $host;
+        proxy_set_header   X-Forwarded-Host $host;
+        proxy_set_header   X-Forwarded-Server $host;
+        proxy_set_header   X-Real-IP        $remote_addr;
+        proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+        proxy_buffering    on;
+        proxy_pass HTTP://users_cluster;
+      }
+
+      location /pay{
+        proxy_redirect     off;
+        proxy_set_header   Host $host;
+        proxy_set_header   X-Forwarded-Host $host;
+        proxy_set_header   X-Forwarded-Server $host;
+        proxy_set_header   X-Real-IP        $remote_addr;
+        proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+        proxy_buffering    on;
+        proxy_pass HTTP://pay_cluster;
+
+      }
+
+      location /attachments{
+        proxy_redirect     off;
+        proxy_set_header   Host $host;
+        proxy_set_header   X-Forwarded-Host $host;
+        proxy_set_header   X-Forwarded-Server $host;
+        proxy_set_header   X-Real-IP        $remote_addr;
+        proxy_set_header   X-Forwarded-For  $proxy_add_x_forwarded_for;
+        proxy_buffering    on;
+        proxy_pass HTTP://attachments_cluster;
+      }
+
+
+    }
+
+
+
+}

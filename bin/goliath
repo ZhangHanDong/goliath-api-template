@@ -1,0 +1,5 @@
+#!/usr/bin/env ruby
+$: << "../../lib" << "./lib"
+
+require 'command/cli'
+Command::Cli.start

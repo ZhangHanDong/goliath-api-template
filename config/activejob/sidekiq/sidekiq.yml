@@ -1,0 +1,13 @@
+:concurrency: 5 # 并发数
+:queues:
+  - [default, 10] # 写在队列参数中的, 表示让 sidekiq 处理这个 queue，默认
+  - [upload_img_to_aliyun, 15]
+  # - [myqueue, 2] # 使用数组的形式写, 第一个参数为打开的 queue 的名称, 第二个为权重，权重越高，优先级越高
+:pidfile: tmp/sidekiq/sidekiq.pid
+
+development:
+  :concurrency: 5
+staging:
+  :concurrency: 10
+production:
+  :concurrency: 25

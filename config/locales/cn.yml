@@ -1,0 +1,96 @@
+cn:
+  activerecord:
+    user: 用户
+    account: 帐号
+    backer: 支持者
+    attributes:
+      user:
+        name: 昵称
+        email: 邮箱
+        password: 密码
+        origin_password: 原密码
+        password_confirmation: 密码
+        contact: 电子邮箱
+        province: 所在地
+        mobile: 手机号码
+        im: QQ号码
+        accounts_collection: 微博帐号
+      user_detail:
+        name: 真实姓名
+        gender: 性别
+        id_card: 身份证号码
+        id_card_1_url: 身份证照片（正面）
+        id_card_2_url: 身份证照片（背面）
+        id_card_3_url: 手持身份证头部照
+        bank: 银行名称
+        bank_branch: 开户支行
+        bank_user: 帐户名称
+        bank_account: 银行卡号
+        mobile: 手机号码
+        qq: QQ号码
+      project:
+        name: 产品名称
+        intro: 产品介绍
+        pledge: 支持者的回报内容
+        target_amount: 目标金额
+        target_days: 上线天数
+        pledge_ids: 回报
+        poster_url: 封面图片
+        video: 视频链接
+        video_url: 视频链接
+        category_id: 产品类型
+        province: 发起地点
+        city: 发起地点
+        summary: 产品简介
+        intro_1: 内容
+        intro_2: 内容
+        intro_3: 内容
+        intro_4: 内容
+        intro_5: 内容
+        risk: 风险说明
+      message:
+        content: 内容
+      comment:
+        content_1: 内容
+      credit:
+        income: 充值金额
+        quantity: 订购数量
+        gateway: 付款方式
+      address:
+        name: 收件人姓名
+        province: 省份
+        city: 地级市
+        county: "市、县级市、县"
+        street: 详细地址
+        postalcode: 邮政编码
+        phone: 联系电话
+      pledge:
+        amount: 支持金额
+        content: 回报内容
+        time_limit_for_year: 预计回报时间
+        time_limit_for_month: 预计回报时间
+        quantity_limit: 限定支持名额
+        shipping: 是否需要邮寄
+        quantity: 名额数量
+        orders_count: 预订数
+      post:
+        title: 标题
+        content: 内容
+        attribute_id: 类别
+        content_1: 内容
+      photo_post:
+        attachment_id: 图片
+      video_post:
+        attachment_url: 视频地址
+      faq:
+        question: 问题
+        answer: 答案
+      ticket:
+        content: 问题描述
+        service_type: "客服类型"
+      review:
+        score: 评价星级
+        content: 评价内容
+  errors:
+    messages:
+      match: "与%{attribute}不匹配"

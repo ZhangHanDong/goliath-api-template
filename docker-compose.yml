@@ -1,0 +1,35 @@
+version: '2'
+
+services:
+  demo-db:
+    image: mysql
+    volumes:
+      - demo-data:/var/lib/mysql
+    environment:
+      MYSQL_ROOT_PASSWORD: demo
+      MYSQL_DATABASE: demo
+    restart: always
+
+  demo-api:
+    image: daocloud.io/demo/demo:master
+    env_file:
+    - app.default.env
+    depends_on:
+      - demo-db
+    links:
+      - demo-db
+    environment:
+      DB_CONNECTION: mysql
+      DB_HOST: demo-db
+      DB_PORT: 3306
+      DB_DATABASE: demo
+      DB_USERNAME: root
+      DB_PASSWORD: demo
+      POOL_SIZE: 10
+    ports:
+      - 11111:9292
+    restart: always
+
+volumes:
+  demo-data:
+    driver: local

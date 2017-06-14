@@ -1,0 +1,39 @@
+namespace :load do
+  task :defaults do
+    set :goliath_env, fetch(:production)
+    set :goliath_restart_sleep_time, 5
+    set :goliath_roles, -> { :app }
+  end
+end
+
+namespace :goliath do
+  desc "Start Goliath Server"
+  task :start do
+    on roles(fetch(:goliath_roles)) do
+      within current_path do
+        execute 'rake', 'server:start'
+      end
+    end
+  end
+
+  desc "Stop Goliath Server"
+  task :stop do
+    on roles(fetch(:goliath_roles)) do
+      within current_path do
+        execute 'rake', 'server:stop'
+      end
+    end
+  end
+
+  desc "Restart Goliath Server"
+  task :restart do
+    on roles(fetch(:goliath_roles)) do
+      within current_path do
+        execute :sudo, "service monit stop"
+        execute 'rake', 'server:restart'
+        execute :sudo, "service monit start"
+      end
+    end
+  end
+
+end
