@@ -1,4 +1,4 @@
-## 使用Goliath 1.0 实现高性能微服务API 完整模板（仅供参考）
+## 使用[Goliath](https://github.com/postrank-labs/goliath) 1.0 实现高性能微服务API 完整模板（仅供参考）
 
 此项目为多年前基于Goliath1.0 + Grape 所做项目，因为Goliath并没有提供一个统一的项目结构，故抽离的模板，可以参考此模板方便的实现API微服务。
 
